@@ -1,0 +1,24 @@
+net: "../model/train.prototxt"
+test_iter: 4370
+test_interval: 10000
+base_lr: 1e-4
+lr_policy: "multistep"
+gamma: 0.5
+stepvalue: 200000
+stepvalue: 350000
+stepvalue: 500000
+stepvalue: 650000
+stepvalue: 800000
+momentum: 0.9
+weight_decay: 0.0004
+display: 50
+# Note: we initialized this net with pre-trained weights from another net and stopped at iteration 620000 
+# Also, to faster train the network we used loss weight schedules (see paper), which are not included here 
+max_iter:  1200000
+snapshot: 20000
+snapshot_prefix: "disp"
+solver_mode: GPU
+solver_type: ADAM
+momentum2: 0.999
+delta: 1e-4
+

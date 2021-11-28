@@ -1,0 +1,16 @@
+build
+.build_release
+data
+models/DispNet/model/DispNet_CVPR2016.caffemodel
+models/DispNetCorr1D/model/DispNetCorr1D_CVPR2016.caffemodel
+models/DispNetCorr1D-K/model/DispNetCorr1D-K_CVPR2016.caffemodel
+models/DispNet-K/model/DispNet-K_CVPR2016.caffemodel
+models/FlowNetC/model/flownetc.caffemodel
+models/FlowNetS/model/flownets.caffemodel
+models/FlowNetS_smalldisp/model/flownets_smalldisp.caffemodel
+
+
+
+
+
+
