@@ -1,7 +1,7 @@
 ## Note: Our Caffe version does not work with CuDNN 6
 ## FROM nvidia/cuda:8.0-cudnn5-devel-ubuntu16.04
 
-FROM nvidia/cuda:11.0-base-ubuntu18.04
+FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu18.04
 
 ## important
 ## refer to https://www.cnblogs.com/tl542475736/p/9645920.html
