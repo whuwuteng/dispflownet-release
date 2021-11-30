@@ -6,7 +6,7 @@ vs=0.0
 sudo docker image build -t dispflownet:${vs} .
 
 #set 
-#sudo docker tag micmac_tool:${vs} whuwuteng/micmac_tool:${vs}
+sudo docker tag dispflownet:${vs} whuwuteng/dispflownet:${vs}
 
 # push
-#sudo docker push whuwuteng/micmac_tool:${vs}
+sudo docker push whuwuteng/dispflownet:${vs}

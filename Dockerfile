@@ -42,7 +42,7 @@ ADD ./tools   ${tool}/tools
 ADD ./examples   	${tool}/examples
 ADD ./Makefile   	${tool}/
 ADD ./Makefile.config	${tool}/
-## RUN make -j 5 all tools
+RUN make -j 5 all tools
 
 
 
