@@ -33,15 +33,17 @@ RUN apt-get update && \
         python-scipy
 
 WORKDIR ${tool}
-ADD ./include ${tool}/include
-ADD ./matlab  ${tool}/matlab
-ADD ./python  ${tool}/python
-ADD ./scripts ${tool}/scripts
-ADD ./src     ${tool}/src
-ADD ./tools   ${tool}/tools
-ADD ./examples   	${tool}/examples
-ADD ./Makefile   	${tool}/
-ADD ./Makefile.config	${tool}/
+COPY ./include ${tool}/include
+COPY ./matlab  ${tool}/matlab
+COPY ./python  ${tool}/python
+COPY ./scripts ${tool}/scripts
+COPY ./src     ${tool}/src
+COPY ./tools   ${tool}/tools
+COPY ./models  ${tool}/models
+RUN chmod -R 777 ${tool}/models
+COPY ./examples   	${tool}/examples
+COPY ./Makefile   	${tool}/
+COPY ./Makefile.config	${tool}/
 RUN make -j 5 all tools
 
 

@@ -16,7 +16,7 @@ display: 50
 # Also, to faster train the network we used loss weight schedules (see paper), which are not included here 
 max_iter:  1200000
 snapshot: 20000
-snapshot_prefix: "disp"
+snapshot_prefix: "/work/OT/ai4geo/users/tengw/stereo_benchmark/SceneFlow/flyingthings3d/disp"
 solver_mode: GPU
 solver_type: ADAM
 momentum2: 0.999

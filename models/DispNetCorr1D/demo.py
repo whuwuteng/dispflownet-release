@@ -23,7 +23,9 @@ def dockerize_filepath(path):
 
 def get_image_size(filename):
     global img_size_bin
-    dim_list = [int(dimstr) for dimstr in str(subprocess.check_output([img_size_bin, filename])).split(',')]
+    #print(filename)
+    # python3 refer to https://stackoverflow.com/questions/43396792/how-to-remove-b-symbol-in-python3
+    dim_list = [int(dimstr) for dimstr in str(subprocess.check_output([img_size_bin, filename]).decode('utf-8')).split(',')]
     if not len(dim_list) == 2:
         print('Could not determine size of image %s' % filename)
         sys.exit(1)
@@ -39,10 +41,10 @@ def check_image_lists(lists):
 
     with open(lists[0], 'r') as f:
         images[0] = [line.strip() for line in f.readlines() if len(line.strip()) > 0]
-        images[0] = [dockerize_filepath(path) for path in images[0]]
+        #images[0] = [dockerize_filepath(path) for path in images[0]]
     with open(lists[1], 'r') as f:
         images[1] = [line.strip() for line in f.readlines() if len(line.strip()) > 0]
-        images[1] = [dockerize_filepath(path) for path in images[1]]
+        #images[1] = [dockerize_filepath(path) for path in images[1]]
 
     if len(images[0]) != len(images[1]):
         print("Unequal amount of images in the given lists (%d vs. %d)" % (len(images[0]), len(images[1])))
@@ -80,7 +82,8 @@ if not (os.path.isfile(caffe_bin) and os.path.isfile(img_size_bin)):
     print('Caffe tool binaries not found. Did you compile caffe with tools (make all tools)?')
     sys.exit(1)
 
-if len(sys.argv)-1 != 4:
+#print(len(sys.argv))
+if len(sys.argv) - 1 != 4:
     print("Use this tool to test DispNet on images\n"
           "Usage for single image pair:\n"
           "    ./demo_dispnet.py IMAGE1 IMAGE2 OUTPUT\n"
@@ -89,8 +92,12 @@ if len(sys.argv)-1 != 4:
           "    ./demo_dispnet.py LIST1.TXT LIST2.TXT OUTLIST.TXT\n")
     sys.exit(1)
 
-img_files = [dockerize_filepath(sys.argv[1]), dockerize_filepath(sys.argv[2])]
-out_files = dockerize_filepath(sys.argv[3])
+#img_files = [dockerize_filepath(sys.argv[1]), dockerize_filepath(sys.argv[2])]
+#out_files = dockerize_filepath(sys.argv[3])
+
+img_files = [sys.argv[1], sys.argv[2]]
+out_files = sys.argv[3]
+
 using_lists = False
 list_length = 1
 
@@ -101,7 +108,7 @@ if img_files[0][-4:].lower() == '.txt':
     print("Done.")
 else:
     print("Image files: " + str(img_files))
-    img_files = [dockerize_filepath(f) for f in img_files]
+    #img_files = [dockerize_filepath(f) for f in img_files]
 
     # Check images
 
@@ -135,12 +142,14 @@ if not using_lists:
 else:
     with open('tmp/img1.txt','w') as outfile:
         with open(img_files[0]) as infile:
-	    for line in infile.readlines():
-                outfile.write('%s\n'%(dockerize_filepath(line.strip())))
+            for line in infile.readlines():
+                #outfile.write('%s\n'%(dockerize_filepath(line.strip())))
+                outfile.write('%s\n'%(line.strip()))
     with open('tmp/img2.txt','w') as outfile:
         with open(img_files[1]) as infile:
-	    for line in infile.readlines():
-                outfile.write('%s\n'%(dockerize_filepath(line.strip())))
+            for line in infile.readlines():
+                #outfile.write('%s\n'%(dockerize_filepath(line.strip())))
+                outfile.write('%s\n'%(line.strip()))
     #subprocess.call(['cp', img_files[0], 'tmp/img1.txt'])
     #subprocess.call(['cp', img_files[1], 'tmp/img2.txt'])
 
@@ -186,7 +195,8 @@ if using_lists:
     #dispnet-corr1d-pred-0000000.pfm
     for (i, target_path) in enumerate(outputs):
         source_path = 'dispnet-corr1d-pred-%07d.pfm'%(i)
-        subprocess.call(['mv', source_path, dockerize_filepath(target_path)])
+        #subprocess.call(['mv', source_path, dockerize_filepath(target_path)])
+        subprocess.call(['mv', source_path, target_path])
 else:
     subprocess.call(['mv', 'dispnet-corr1d-pred-0000000.pfm', out_files])
 
