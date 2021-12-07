@@ -16,7 +16,7 @@ Important thing is that because the code need to be build, so the **devel versio
 
 ## Folder permission
 
-The command **ADD** and **COPY** can not change the permission. In the code, there are sub folder in the directory, if you want to run the code in the sub folder, the permission need to changed :
+The command **ADD** and **COPY** can not change the permission. In the code, there are sub folders in the directory, if you want to run the code in the sub folder, the permission needs to be changed :
 ```
 RUN chmod -R 777 ${tool}/models
 ```
