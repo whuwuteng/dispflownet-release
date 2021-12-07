@@ -3,7 +3,9 @@
 
 ## Introduction
 
-There a some tricks for the [Docker](https://www.docker.com/) and [singularity](https://hpc.nih.gov/apps/singularity.html) especially with CUDA code.
+There a some tricks for the [Docker](https://www.docker.com/) and [singularity](https://hpc.nih.gov/apps/singularity.html) especially with CUDA code. The DispNetC code is original from [dispnet-flownet-docker](https://github.com/lmb-freiburg/dispnet-flownet-docker).
+
+[Someone says](https://stackoverflow.com/questions/57015346/can-i-run-a-docker-container-with-cuda-10-when-host-has-cuda-9) that the CUDA version should be same between the container and host, I am not sure, so I use the following setting.
 
 ## Dockerfile
 
