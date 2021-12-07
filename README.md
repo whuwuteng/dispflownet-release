@@ -9,7 +9,7 @@ There are some tricks for the [Docker](https://www.docker.com/) and [singularity
 
 ## Dockerfile
 
-Considering that the official caffe code is not supported the CuDNN 8(there is a way to change it, you can replace the **cudnn_conv_layer_cudnn8.cpp**), so the base environment is :
+Considering that the official caffe code doesnot support the CuDNN 8(there is a way to change it, you can replace the **cudnn_conv_layer_cudnn8.cpp**), so the base environment is :
 ```
 FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu18.04
 ```
