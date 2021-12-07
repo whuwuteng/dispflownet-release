@@ -14,7 +14,7 @@ Considering that the official caffe code doesnot support the CuDNN 8(there is a 
 FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu18.04
 ```
 
-Important thing is that because the code need to be build, so the **devel version** is important. For example, if you just use the **Pytorch** code, you can use the **runtime version**.
+The important thing is that because the code needs to be built, so the **devel version** is important. For example, if you just use the **Pytorch** code, you can use the **runtime version**.
 
 ## Folder permission
 
