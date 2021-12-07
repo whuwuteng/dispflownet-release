@@ -1,37 +1,37 @@
-# Caffe
+# DispNetC on CNES HAL
 
-[![Build Status](https://travis-ci.org/BVLC/caffe.svg?branch=master)](https://travis-ci.org/BVLC/caffe)
-[![License](https://img.shields.io/badge/license-BSD-blue.svg)](LICENSE)
 
-Caffe is a deep learning framework made with expression, speed, and modularity in mind.
-It is developed by the Berkeley Vision and Learning Center ([BVLC](http://bvlc.eecs.berkeley.edu)) and community contributors.
+## Introduction
 
-Check out the [project site](http://caffe.berkeleyvision.org) for all the details like
+There a some tricks for the [Docker](https://www.docker.com/) and [singularity](https://hpc.nih.gov/apps/singularity.html) especially with CUDA code.
 
-- [DIY Deep Learning for Vision with Caffe](https://docs.google.com/presentation/d/1UeKXVgRvvxg9OUdh_UiC5G71UMscNPlvArsWER41PsU/edit#slide=id.p)
-- [Tutorial Documentation](http://caffe.berkeleyvision.org/tutorial/)
-- [BVLC reference models](http://caffe.berkeleyvision.org/model_zoo.html) and the [community model zoo](https://github.com/BVLC/caffe/wiki/Model-Zoo)
-- [Installation instructions](http://caffe.berkeleyvision.org/installation.html)
+## Dockerfile
 
-and step-by-step examples.
+Considering that the official caffe code is not supported the CuDNN 8(there is a way to change it, you can replace the **cudnn_conv_layer_cudnn8.cpp**), so the base environment is :
+```
+FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu18.04
+```
 
-[![Join the chat at https://gitter.im/BVLC/caffe](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/BVLC/caffe?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+Important thing is that because the code need to be build, so the **devel version** is important. For example, if you just use the **Pytorch** code, you can use the **runtime version**.
 
-Please join the [caffe-users group](https://groups.google.com/forum/#!forum/caffe-users) or [gitter chat](https://gitter.im/BVLC/caffe) to ask questions and talk about methods and models.
-Framework development discussions and thorough bug reports are collected on [Issues](https://github.com/BVLC/caffe/issues).
+## Folder permission
 
-Happy brewing!
+The command **ADD** and **COPY** can not change the permission. In the code, there are sub folder in the directory, if you want to run the code in the sub folder, the permission need to changed :
+```
+RUN chmod -R 777 ${tool}/models
+```
 
-## License and Citation
+## singularity
 
-Caffe is released under the [BSD 2-Clause license](https://github.com/BVLC/caffe/blob/master/LICENSE).
-The BVLC reference models are released for unrestricted use.
+On the HAL, after building the image, you can run the image by :
+```
+singularity run --nv --writable-tmpfs dispflownet.img
+```
 
-Please cite Caffe in your publications if it helps your research:
+**--nv** is to use the CUDA, and **--writable-tmpfs** is to write some temp files because the **demo.py** needs to write some files in the folder.
 
-    @article{jia2014caffe,
-      Author = {Jia, Yangqing and Shelhamer, Evan and Donahue, Jeff and Karayev, Sergey and Long, Jonathan and Girshick, Ross and Guadarrama, Sergio and Darrell, Trevor},
-      Journal = {arXiv preprint arXiv:1408.5093},
-      Title = {Caffe: Convolutional Architecture for Fast Feature Embedding},
-      Year = {2014}
-    }
+## Contact
+
+If you think you have any problem, contact [Teng Wu]<whuwuteng@gmail.com>
+
+ 
